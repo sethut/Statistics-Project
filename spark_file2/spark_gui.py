@@ -5,7 +5,8 @@ import b_j
 import m_change
 import m
 import wb
-
+import deep_m
+import m_all
 class Example(wx.Frame):
 
     def __init__(self, parent, title):
@@ -48,7 +49,7 @@ class Example(wx.Frame):
         sizer.Add(text4, pos=(4, 0), flag=wx.TOP|wx.LEFT, border=10)
 
         self.combo = wx.ComboBox(panel,choices=
-        ['서울-강북지역','서울-강남지역','경기','인천',
+        ['선 택','서울-강북지역','서울-강남지역','경기','인천',
         '부산','대구','광주','대전','울산','세종','강원',
         '충북','충남','전북','전남','경북','경남','제주']
         )
@@ -57,9 +58,9 @@ class Example(wx.Frame):
         self.Bind(wx.EVT_COMBOBOX,self.OnSelect,self.combo);
         sb = wx.StaticBox(panel, label="옵    션")
 
-        self.check1 = wx.CheckBox(panel,-1,"김")
-        self.check2 = wx.CheckBox(panel,-1,"이")
-        self.check3 = wx.CheckBox(panel,-1,"주")
+        self.check1 = wx.CheckBox(panel,-1,"매매 + 건물")
+        self.check2 = wx.CheckBox(panel,-1,"전국 매매가")
+        self.check3 = wx.CheckBox(panel,-1,"지도 보기")
         self.Bind(wx.EVT_CHECKBOX,self.OnCheck1,self.check1)
         self.Bind(wx.EVT_CHECKBOX,self.OnCheck2,self.check2)
         self.Bind(wx.EVT_CHECKBOX,self.OnCheck3,self.check3)
@@ -71,9 +72,10 @@ class Example(wx.Frame):
         sizer.Add(boxsizer, pos=(5, 0), span=(1, 5),
             flag=wx.EXPAND|wx.TOP|wx.LEFT|wx.RIGHT , border=10)
 
-        button3 = wx.Button(panel, label='Help')
-        sizer.Add(button3, pos=(7, 0), flag=wx.LEFT, border=10)
-
+        self.button3 = wx.Button(panel, label='변화율')
+        sizer.Add(self.button3, pos=(7, 0), flag=wx.LEFT, border=10)
+        self.Bind(wx.EVT_BUTTON,self.OnAllButton,self.button3)
+        
         self.button4 = wx.Button(panel, label="Ok")
         sizer.Add(self.button4, pos=(7, 3))
         self.Bind(wx.EVT_BUTTON,self.OnOkButton,self.button4)
@@ -94,6 +96,8 @@ class Example(wx.Frame):
         self.check2_ok=int(self.check2.GetValue())
     def OnCheck3(self,event):
         self.check3_ok=int(self.check3.GetValue())
+    def OnAllButton(self,event):
+        m_all.run()
     def OnOkButton(self,event):
         self.yesan=int(self.tc1.GetValue())
         self.year=self.tc2.GetValue()
@@ -102,7 +106,10 @@ class Example(wx.Frame):
         year_list=self.year.split('년 ')
         month_list=year_list[1].split("월")
         predict_month=(12*(int(year_list[0])-2012)+(int(month_list[0])-1))
-        m.run(predict_month,self.region)
+        if self.check2_ok == 0 :
+        	deep_m.run(predict_month,self.region)
+        else: 
+        	m_all.run()	
 
 class MyApp(wx.App):
     def OnInit(self):
