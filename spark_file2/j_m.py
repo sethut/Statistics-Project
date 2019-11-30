@@ -47,3 +47,4 @@ def run():
     plt.bar(region_list, remainder_ratio, width=0.5, bottom=ratio_mean[5],color='r')
     plt.show()
 
+

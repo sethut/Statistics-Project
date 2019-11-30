@@ -1,5 +1,10 @@
+#-*-coding: utf-8 -*-
 import wx
-
+import j_m
+import b_j
+import m_change
+import m
+import wb
 
 class Example(wx.Frame):
 
@@ -10,7 +15,8 @@ class Example(wx.Frame):
         self.check3_ok=0
         self.InitUI()
         self.Centre()
-
+        self.yesan=0
+#self.year=""
     def InitUI(self):
         
         panel = wx.Panel(self)
@@ -30,9 +36,14 @@ class Example(wx.Frame):
 
         text2 = wx.StaticText(panel, label="예            산")
         sizer.Add(text2, pos=(2, 0), flag=wx.LEFT, border=10)
-
         self.tc1 = wx.TextCtrl(panel)
         sizer.Add(self.tc1, pos=(2, 1), span=(1, 3), flag=wx.TOP|wx.EXPAND)
+        
+        text3 = wx.StaticText(panel, label="연            도")
+        sizer.Add(text3, pos=(3, 0), flag=wx.LEFT, border=10)
+        self.tc2 = wx.TextCtrl(panel)
+        sizer.Add(self.tc2, pos=(3, 1), span=(1, 3), flag=wx.TOP|wx.EXPAND)
+
         text4 = wx.StaticText(panel, label="지            역")
         sizer.Add(text4, pos=(4, 0), flag=wx.TOP|wx.LEFT, border=10)
 
@@ -77,21 +88,22 @@ class Example(wx.Frame):
 
     def OnSelect(self,event):
         self.region=self.combo.GetValue()
-        print(self.region)
     def OnCheck1(self,event):
         self.check1_ok=int(self.check1.GetValue())
-        print(self.check1_ok)
     def OnCheck2(self,event):
         self.check2_ok=int(self.check2.GetValue())
-        print(self.check2_ok)
     def OnCheck3(self,event):
         self.check3_ok=int(self.check3.GetValue())
-        print(self.check3_ok)
     def OnOkButton(self,event):
-        self.yesan=self.tc1.GetValue()
-        print("예산 : %s 지역 : %s 옵션 : %d %d %d"%(self.yesan,self.region,self.check1_ok,self.check2_ok,self.check3_ok))
-        import j_m
-        j_m.run()
+        self.yesan=int(self.tc1.GetValue())
+        self.year=self.tc2.GetValue()
+        print("예산 : %s, 연도 : %s, 지역 : %s 옵션 : %d %d %d"%(self.yesan,self.year,self.region,self.check1_ok,self.check2_ok,self.check3_ok))	
+#m.run()
+        year_list=self.year.split('년 ')
+        month_list=year_list[1].split("월")
+        predict_month=(12*(int(year_list[0])-2012)+(int(month_list[0])-1))
+        m.run(predict_month,self.region)
+
 class MyApp(wx.App):
     def OnInit(self):
         self.frame = Example(None, "select the option")
