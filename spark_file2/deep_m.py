@@ -1,24 +1,22 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 import m
-def run(arg_month,arg_region):
+def run(arg_yesan,arg_month,arg_region):
 	pd_csv = pd.read_csv('meme.csv')
 	year_list=list(pd_csv)
 	a=[]
 	for i in range(1,len(year_list)):
 	    a.append(i)
-	region=['서울-강북지역','서울-강남지역','경기','인천',
+	region=['선 택','서울-강북지역','서울-강남지역','경기','인천',
         '부산','대구','광주','대전','울산','세종','강원',
-        '충북','충남','전북','전남','경북','경남','제주']
-	    
+        '충청도','전라도','경상도']
 	
 	df = pd.DataFrame({
 	    'month' : a,
-	    'meme' : pd_csv.loc[region.index(arg_region)][1:]
+	    'meme' : pd_csv.loc[region.index(arg_region)-1][1:]
 	})
 	X = df.loc[:,['month']]
 	y = df.loc[:,['meme']]
-	
 	new_x=[]
 	for i in range(1,52):
 	    new_x.append(i)
@@ -26,6 +24,8 @@ def run(arg_month,arg_region):
 	from sklearn import linear_model
 	reg = linear_model.LinearRegression()
 	reg.fit(X,y)
+	print("x=",X)
+	print("y=",y)
 	print( "R²=", reg.score(X,y) )
 	print( "coefficient=", reg.coef_ )
 	print( "intercept=", reg.intercept_ )
@@ -53,5 +53,5 @@ def run(arg_month,arg_region):
 #	rc('font', family='AppleGothic')
 #	plt.rcParams['axes.unicode_minus'] = False
 #	plt.show()
-	m.run(arg_month,arg_region,reg.coef_[0][0]*arg_month + reg.intercept_[0])
+	m.run(arg_yesan,arg_month,arg_region,reg.coef_[0][0]*arg_month + reg.intercept_[0])
 #print(reg.coef_[0][0]*arg_month + reg.intercept_[0])

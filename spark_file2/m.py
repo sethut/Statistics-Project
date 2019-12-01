@@ -5,13 +5,12 @@ from matplotlib import rc
 import matplotlib.pyplot as plt
 import matplotlib.font_manager as fm
 import deep_m
-def run(arg_month,arg_region,arg_y):
+def run(arg_yesan,arg_month,arg_region,arg_y):
 	meme = pd.read_csv("meme.csv", encoding="utf-8")
 	year=["2012년", "2013년" , "2014년","2015년", "2016년" , "2017년", "2018년" , "2019년"]
 	region=['서울-강북지역','서울-강남지역','경기','인천',
         '부산','대구','광주','대전','울산','세종','강원',
-        '충북','충남','전북','전남','경북','경남','제주']
-	
+        '충청도','전라도','경상도']
 	date=list(meme)
 	date_list=date[0:]
 	year_list=[] 
@@ -42,7 +41,8 @@ def run(arg_month,arg_region,arg_y):
 	        y,m = divmod(arg_month,12)
 	        year.append(str(y+2012)+"년" +str(m+1) + "월")
 	        meme_mean.append(arg_y)
-	
+	print(arg_y)
+	print(arg_month)
 	### DataFrame 생성 ### 
 	meme_2_df = pd.DataFrame(columns = year)
 	for i in range(len(year)):
@@ -50,10 +50,11 @@ def run(arg_month,arg_region,arg_y):
 	
 #	if arg_month > 95 :
 #		meme_2_df[arg_month]=arg_y
-	### MatePlot 생성 ### 
+	### MatePlot 생성 ###
 	plt.figure(figsize=(7,7))
 #	plt.text(50, .025, arg_y)	
 	plt.plot(year,meme_mean,label=region_list)
+	plt.axhline(y=arg_yesan/1000, color='r', linewidth=4)
 	plt.legend(region_list,loc = 'upper left',ncol=4,bbox_to_anchor=(1, 1)) 
 	rc('font', family='AppleGothic')
 	plt.rcParams['axes.unicode_minus'] = False

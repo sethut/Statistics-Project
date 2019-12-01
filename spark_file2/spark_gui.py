@@ -7,6 +7,8 @@ import m
 import wb
 import deep_m
 import m_all
+import m_change
+import m_map
 class Example(wx.Frame):
 
     def __init__(self, parent, title):
@@ -51,7 +53,7 @@ class Example(wx.Frame):
         self.combo = wx.ComboBox(panel,choices=
         ['선 택','서울-강북지역','서울-강남지역','경기','인천',
         '부산','대구','광주','대전','울산','세종','강원',
-        '충북','충남','전북','전남','경북','경남','제주']
+        '충청도','전라도','경상도']
         )
         sizer.Add(self.combo, pos=(4, 1), span=(1, 3),
             flag=wx.TOP|wx.EXPAND, border=5)
@@ -59,7 +61,7 @@ class Example(wx.Frame):
         sb = wx.StaticBox(panel, label="옵    션")
 
         self.check1 = wx.CheckBox(panel,-1,"매매 + 건물")
-        self.check2 = wx.CheckBox(panel,-1,"전국 매매가")
+        self.check2 = wx.CheckBox(panel,-1,"추천 지역")
         self.check3 = wx.CheckBox(panel,-1,"지도 보기")
         self.Bind(wx.EVT_CHECKBOX,self.OnCheck1,self.check1)
         self.Bind(wx.EVT_CHECKBOX,self.OnCheck2,self.check2)
@@ -72,7 +74,7 @@ class Example(wx.Frame):
         sizer.Add(boxsizer, pos=(5, 0), span=(1, 5),
             flag=wx.EXPAND|wx.TOP|wx.LEFT|wx.RIGHT , border=10)
 
-        self.button3 = wx.Button(panel, label='변화율')
+        self.button3 = wx.Button(panel, label='추 세')
         sizer.Add(self.button3, pos=(7, 0), flag=wx.LEFT, border=10)
         self.Bind(wx.EVT_BUTTON,self.OnAllButton,self.button3)
         
@@ -106,10 +108,14 @@ class Example(wx.Frame):
         year_list=self.year.split('년 ')
         month_list=year_list[1].split("월")
         predict_month=(12*(int(year_list[0])-2012)+(int(month_list[0])-1))
+
         if self.check2_ok == 0 :
-        	deep_m.run(predict_month,self.region)
+            deep_m.run(self.yesan,predict_month,self.region)
         else: 
-        	m_all.run()	
+            m_change.run(predict_month)	
+        if self.check3_ok == 1:
+            m_map.run()
+
 
 class MyApp(wx.App):
     def OnInit(self):
