@@ -33,7 +33,7 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 
-pd_csv = pd.read_csv('wolse.csv')
+pd_csv = pd.read_csv('meme.csv')
 year_list=list(pd_csv)
 a=[]
 for i in range(1,len(year_list)):
@@ -46,7 +46,7 @@ df = pd.DataFrame({
 # #'mass': [52.21, 53.12, 54.48, 55.84, 57.20, 58.57, 59.93, 61.29, 63.11, 64.47, 66.28, 68.10, 69.92, 72.19, 74.46],
 })
 
-#print(year_list)
+print(df)
 
 
 #han_x=[1.47, 1.50, 1.52, 1.55, 1.57, 1.60, 1.63, 1.65, 1.68, 1.70, 1.73, 1.75, 1.78, 1.80, 1.83]
@@ -83,9 +83,12 @@ new_y2=[]
 for i in range (0,len(new_y)):
     new_y2.append(new_y[i][0])
 
+	
 result=[]
 plt.plot(X,y)
 plt.plot(new_x,new_y2)
 plt.show()
 
+User_X=int(input())
+print(reg.coef_[0][0]*User_X + reg.intercept_[0])
 
