@@ -1,4 +1,4 @@
-###################연도별로 정리 버전################
+##################연도별로 정리 버전################
 ### 월 추 ###
 import pandas as pd
 import numpy as np
@@ -6,18 +6,17 @@ from matplotlib import rc
 import matplotlib.pyplot as plt
 import matplotlib.font_manager as fm
 from sklearn import linear_model
-def run(arg_yesan,Arg_month,arg_region):
-	Arg_month=Arg_month-41
+def run(arg_yesan,arg_month,arg_region):
+	Arg_month=arg_month-41
 	monthly = pd.read_csv("wolse.csv", encoding="utf-8")
 	year=["2015년", "2016년" , "2017년", "2018년" , "2019년"]
-	date=list(monthly)
-	date_list=date[0:]
-	year_list=[] 
-
-	region_list=monthly['지 역'].values
 	region=['서울-강북지역','서울-강남지역','경기','인천',
         '부산','대구','광주','대전','울산','세종','강원',
         '충청도','전라도','경상도']
+	date=list(monthly)
+	date_list=date[0:]
+	year_list=[] 
+	region_list=monthly['지 역'].values
 	monthly_money=[]
 	for i in range(0,len(region_list)):
 	    monthly_money.append(monthly.iloc[i].values[0:])
@@ -41,32 +40,42 @@ def run(arg_yesan,Arg_month,arg_region):
 	print( "R²=", reg.score(X,y) )
 	print( "coefficient=", reg.coef_ )
 	print( "intercept=", reg.intercept_ )
-	new_y=[]
-	#for i in range(0,len(a)):
-	#    new_y.append(reg.coef_ * a[i] + reg.intercept_)
-	for i in range(0,len(date_list)-1):
-	 	new_y.append(df['wolse'][i])
+	
+	for i in range(len(year)) :
+		year_list.append([dec for dec in date_list if year[i] in dec])
 
-	deep_x=[]
-	deep_y=[]
-	for i in range(0,Arg_month):
-	    deep_x.append(i)
+	region_list=monthly['지 역'].values
 
-	#for i in range(0,Arg_month):
-	#    deep_y.append(reg.coef_[0][0] * deep_x[i] + reg.intercept_[0])
-	a.append(Arg_month)
-	print(a)
-	new_y.append(reg.coef_[0][0] * deep_x[Arg_month-1] + reg.intercept_[0])
+	wolse_money=[]
+	for i in range(0,len(region_list)):
+		wolse_money.append(monthly.iloc[i].values[0:])
+	
+	### DataFrame 생성 ### 
+	monthly_df = pd.DataFrame(columns = date_list)
+	
+	monthly_df.loc[0] = wolse_money[region.index(arg_region)]
+	monthly_mean=[]
 
-	print(deep_y)
-	### MatePlot 생성 ###
-	plt.figure(figsize=(7,7))
-	plt.title("wolse")
+	#### 연도별 평균 ### 
+	for i in range(len(year_list)) :
+			monthly_mean.append(monthly_df[year_list[i]].mean(axis=1))
+	if Arg_month > 52 :
+	        y,m = divmod(arg_month,12)
+	        year.append(str(y+2012)+"년" +str(m+1) + "월")
+	        monthly_mean.append(reg.coef_[0][0] * Arg_month + reg.intercept_[0])
+	### DataFrame 생성 ### 
+	monthly_2_df = pd.DataFrame(columns = year)
+	for i in range(len(year)):
+		monthly_2_df[year[i]] = monthly_mean[i]
+
+	plt.figure(figsize=(8,8))
+	plt.title('m.py')
 	plt.grid(True)
-	plt.plot(a,new_y,label=year)
-	plt.plot(a[-1],new_y[-1],"xk")
-	plt.text(a[-1]-2,new_y[-1]+5, str(new_y[-1]))
-	plt.legend(region_list,loc = 'upper left',ncol=4,bbox_to_anchor=(1, 1))
-	rc('font', family='NanumGothic')
+	plt.plot(year,monthly_mean)
+	plt.plot(year[-1],monthly_mean[-1],"xk")
+	plt.text(year[-2],monthly_mean[-1]+10000, str(round(monthly_mean[-1],4)))
+	plt.legend(region_list,loc = 'upper left',ncol=4,bbox_to_anchor=(1, 1)) 
+	rc('font', family='AppleGothic')
 	plt.rcParams['axes.unicode_minus'] = False
 	plt.show()
+

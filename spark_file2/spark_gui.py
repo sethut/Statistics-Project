@@ -113,8 +113,8 @@ class Example(wx.Frame):
         predict_month=(12*(int(year_list[0])-2012)+(int(month_list[0])-1))
 
         if self.check1_ok == 1:
+#w.run(self.yesan,predict_month,self.region)
             w.run(self.yesan,predict_month,self.region)
-        
         if self.check2_ok == 0 :
             deep_m.run(self.yesan,predict_month,self.region,self.check1_ok)
         else: 

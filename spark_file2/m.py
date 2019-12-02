@@ -6,8 +6,6 @@ import matplotlib.pyplot as plt
 import matplotlib.font_manager as fm
 import deep_m
 def run(arg_yesan,arg_month,arg_region,arg_y,building):
-    
-	print("!!@!@!@",building)
 	meme = pd.read_csv("meme.csv", encoding="utf-8")
 	year=["2012년", "2013년" , "2014년","2015년", "2016년" , "2017년", "2018년" , "2019년"]
 	region=['서울-강북지역','서울-강남지역','경기','인천',

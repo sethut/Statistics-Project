@@ -5,7 +5,6 @@ from matplotlib import rc
 import matplotlib.pyplot as plt
 import matplotlib.font_manager as fm
 import deep_m
-import w_test
 def run(arg_yesan,arg_month,arg_region):
 	meme = pd.read_csv("meme.csv", encoding="utf-8")
 	year=["2012년", "2013년" , "2014년","2015년", "2016년" , "2017년", "2018년" , "2019년"]
