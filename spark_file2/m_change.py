@@ -4,9 +4,9 @@ import numpy as np
 from matplotlib import rc
 import matplotlib.pyplot as plt
 import matplotlib.font_manager as fm
-
+import map2
 def run(arg_month):
-	rc('font', family='AppleGothic')
+	rc('font', family='NanumGothic')
 	meme = pd.read_csv("meme_change.csv", encoding="utf-8")
 	date=list(meme)
 	date_list=date[1:]
@@ -47,7 +47,6 @@ def run(arg_month):
 	    print( "intercept=", reg.intercept_ )
 	    print( region[i] , " : ", arg_month*reg.coef_[0][0] + reg.intercept_[0])
 	    rslt.append(arg_month*reg.coef_[0][0] + reg.intercept_[0]-current_increase[i])
-
 	### MatePlot 생성 ### 
 	plt.figure(figsize=(7,7))
 	plt.bar(region,rslt)

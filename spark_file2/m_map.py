@@ -6,14 +6,8 @@ import matplotlib.pyplot as plt
 
 def run() :
 	from matplotlib import font_manager, rc
-	if platform.system() == 'Darwin':
-	    rc('font', family='AppleGothic')
-	elif platform.system() == 'Windows':
-	    font_name = font_manager.FontProperties(fname="c:/Windows/Fonts/malgun.ttf").get_name()
-	    rc('font', family=font_name)
-	else:
-	    print('Unknown system... sorry~~~~')    
 	
+	rc('font', family='NanumGothic')
 	plt.rcParams['axes.unicode_minus'] = False
 
 	data_draw_korea = pd.read_csv('data_draw_korea.csv', index_col=0, encoding='UTF-8')
@@ -42,7 +36,7 @@ def run() :
 	gamma = 0.75
 
 	blockedMap = data_draw_korea
-	targetData = '땅  값'
+	targetData = '땅 값'
 
 	whitelabelmin = (max(blockedMap[targetData]) - min(blockedMap[targetData])) * 0.25 + min(blockedMap[targetData])
 

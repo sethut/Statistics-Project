@@ -45,7 +45,7 @@ def run():
 
 	remainder_ratio=100-ratio_mean[4]
 	plt.figure(figsize=(20,20))
-	#rc('font', family='AppleGothic')
+	rc('font', family='NanumGothic')
 	plt.rcParams['axes.unicode_minus'] = False
 	plt.bar(region_list, ratio_mean[4], width=0.5,color='b')
 	plt.bar(region_list, remainder_ratio, width=0.5, bottom=ratio_mean[4],color='r')

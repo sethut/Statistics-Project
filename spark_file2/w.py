@@ -69,13 +69,13 @@ def run(arg_yesan,arg_month,arg_region):
 		monthly_2_df[year[i]] = monthly_mean[i]
 
 	plt.figure(figsize=(8,8))
-	plt.title('m.py')
+	plt.title('w.py')
 	plt.grid(True)
 	plt.plot(year,monthly_mean)
 	plt.plot(year[-1],monthly_mean[-1],"xk")
 	plt.text(year[-2],monthly_mean[-1]+10000, str(round(monthly_mean[-1],4)))
-	plt.legend(region_list,loc = 'upper left',ncol=4,bbox_to_anchor=(1, 1)) 
-	rc('font', family='AppleGothic')
+	plt.legend(arg_region,loc = 'upper left',ncol=4,bbox_to_anchor=(1, 1)) 
+	rc('font', family='NanumGothic')
 	plt.rcParams['axes.unicode_minus'] = False
 	plt.show()
 

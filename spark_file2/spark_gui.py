@@ -113,8 +113,8 @@ class Example(wx.Frame):
         month_list=year_list[1].split("월")
         predict_month=(12*(int(year_list[0])-2012)+(int(month_list[0])-1))
 
+        print("!!!!!!!!!!!!!",self.region)
         if self.check1_ok == 1:
-#w.run(self.yesan,predict_month,self.region)
             wb.run(self.yesan,predict_month,self.region)
             w.run(self.yesan,predict_month,self.region)
         if self.check2_ok == 0 :

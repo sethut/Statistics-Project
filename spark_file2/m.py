@@ -58,8 +58,8 @@ def run(arg_yesan,arg_month,arg_region,arg_y,building):
 	plt.plot(year[-1],meme_mean[-1],"xk")
 	plt.text(year[-2],meme_mean[-1]+10000, str(round(meme_mean[-1],4)))
 	plt.axhline(y=arg_yesan/1000, color='r', linewidth=4)
-	plt.legend(region_list,loc = 'upper left',ncol=4,bbox_to_anchor=(1, 1)) 
-	rc('font', family='AppleGothic')
+	plt.legend(arg_region,loc = 'upper left',ncol=4,bbox_to_anchor=(1, 1)) 
+	rc('font', family='NanumGothic')
 	plt.rcParams['axes.unicode_minus'] = False
 	plt.show()
 #deep_m.run(arg_month,arg_region)
