@@ -11,7 +11,8 @@ import m_change
 import m_map
 import building
 import w
-
+import wb
+import map2
 class Example(wx.Frame):
 
     def __init__(self, parent, title):
@@ -114,13 +115,14 @@ class Example(wx.Frame):
 
         if self.check1_ok == 1:
 #w.run(self.yesan,predict_month,self.region)
+            wb.run(self.yesan,predict_month,self.region)
             w.run(self.yesan,predict_month,self.region)
         if self.check2_ok == 0 :
             deep_m.run(self.yesan,predict_month,self.region,self.check1_ok)
         else: 
             m_change.run(predict_month)	
         if self.check3_ok == 1:
-            m_map.run()
+            map2.run(predict_month)
 
 
 class MyApp(wx.App):
