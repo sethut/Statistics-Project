@@ -7,6 +7,7 @@ import matplotlib.pyplot as plt
 import matplotlib.font_manager as fm
 
 def run():
+	rc('font', family='AppleGothic')
 	ratio = pd.read_csv("bojeungum-jeonse.csv", encoding="utf-8")
 	year=["2015년", "2016년" , "2017년", "2018년" , "2019년"]
 
@@ -45,7 +46,6 @@ def run():
 
 	remainder_ratio=100-ratio_mean[4]
 	plt.figure(figsize=(20,20))
-	rc('font', family='NanumGothic')
 	plt.rcParams['axes.unicode_minus'] = False
 	plt.bar(region_list, ratio_mean[4], width=0.5,color='b')
 	plt.bar(region_list, remainder_ratio, width=0.5, bottom=ratio_mean[4],color='r')

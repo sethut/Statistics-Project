@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 import matplotlib.font_manager as fm
 import map2
 def run(arg_month):
-	rc('font', family='NanumGothic')
+	rc('font', family='AppleGothic')
 	meme = pd.read_csv("meme_change.csv", encoding="utf-8")
 	date=list(meme)
 	date_list=date[1:]

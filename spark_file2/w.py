@@ -7,6 +7,7 @@ import matplotlib.pyplot as plt
 import matplotlib.font_manager as fm
 from sklearn import linear_model
 def run(arg_yesan,arg_month,arg_region):
+	rc('font', family='AppleGothic')
 	Arg_month=arg_month-41
 	monthly = pd.read_csv("wolse.csv", encoding="utf-8")
 	year=["2015년", "2016년" , "2017년", "2018년" , "2019년"]
@@ -75,7 +76,6 @@ def run(arg_yesan,arg_month,arg_region):
 	plt.plot(year[-1],monthly_mean[-1],"xk")
 	plt.text(year[-2],monthly_mean[-1]+10000, str(round(monthly_mean[-1],4)))
 	plt.legend(arg_region,loc = 'upper left',ncol=4,bbox_to_anchor=(1, 1)) 
-	rc('font', family='NanumGothic')
 	plt.rcParams['axes.unicode_minus'] = False
 	plt.show()
 

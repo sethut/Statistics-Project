@@ -1,13 +1,11 @@
 import pandas as pd
 import numpy as np
-
+from matplotlib import font_manager, rc
 import platform
 import matplotlib.pyplot as plt
 
 def run() :
-	from matplotlib import font_manager, rc
-	
-	rc('font', family='NanumGothic')
+	rc('font', family='AppleGothic')
 	plt.rcParams['axes.unicode_minus'] = False
 
 	data_draw_korea = pd.read_csv('data_draw_korea.csv', index_col=0, encoding='UTF-8')
