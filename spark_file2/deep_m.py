@@ -23,16 +23,18 @@ def run(arg_yesan,arg_month,arg_region,building_check):
 	    new_x.append(i)
 
 	from sklearn import linear_model
+	from sklearn.preprocessing import PolynomialFeatures
+
 	reg = linear_model.LinearRegression()
 	reg.fit(X,y)
-	print("x=",X)
+	print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaax=",X)
 	print("y=",y)
 	print( "R²=", reg.score(X,y) )
 	print( "coefficient=", reg.coef_ )
 	print( "intercept=", reg.intercept_ )
 	new_y=[]
 	for i in range(0,len(new_x)):
-	    new_y.append(reg.coef_ * new_x[i] + reg.intercept_)
+		new_y.append(reg.coef_ * new_x[i] + reg.intercept_)
 	    
 	new_y2=[]
 	for i in range (0,len(new_y)):
@@ -46,7 +48,7 @@ def run(arg_yesan,arg_month,arg_region,building_check):
 
 	for i in range(0,arg_month):
 	    deep_y.append(reg.coef_ * deep_x[i] + reg.intercept_)
-	
+
 #	### MatePlot 생성 ### 
 #	plt.figure(figsize=(7,7))
 #	plt.plot(deep_x,deep_y,label=arg_region)
@@ -55,7 +57,9 @@ def run(arg_yesan,arg_month,arg_region,building_check):
 #	plt.rcParams['axes.unicode_minus'] = False
 #	plt.show()
 	if building_check==0:
-			m.run(arg_yesan,arg_month,arg_region,reg.coef_[0][0]*arg_month + reg.intercept_[0],building_check)
+		m.run(arg_yesan,arg_month,arg_region,reg.coef_[0][0], reg.intercept_[0],building_check)
+#	m.run(arg_yesan,arg_month,arg_region,reg.coef_[0][0]*arg_month + reg.intercept_[0],building_check)
 	else:
-    		m.run(arg_yesan,arg_month,arg_region,reg.coef_[0][0]*arg_month + reg.intercept_[0],4000*50*4)
+    		m.run(arg_yesan,arg_month,arg_region,reg.coef_[0][0], reg.intercept_[0],4000*50*4)
+#	m.run(arg_yesan,arg_month,arg_region,reg.coef_[0][0]*arg_month + reg.intercept_[0],4000*50*4)
 #print(reg.coef_[0][0]*arg_month + reg.intercept_[0])
