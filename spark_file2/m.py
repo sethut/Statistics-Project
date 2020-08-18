@@ -40,12 +40,17 @@ def run(arg_yesan,arg_month,arg_region,arg_coef,arg_intercept,building):
 	for i in range(len(year_list)) :
 			meme_mean.append(meme_df[year_list[i]].mean(axis=1)+building)
 	if arg_month > 95 :
-	        y,m = divmod(arg_month,12)
-	        year.append(str(y+2012)+"년" +str(m+1) + "월")
-	        meme_mean.append(arg_coef*arg_month + arg_intercept+building)
+		y,m = divmod(arg_month,12)
+		if y >= 8 :
+			for i in range(8,y,1):
+				year.append(str(i+2012)+"년") 
+				meme_mean.append(arg_coef*(12*i+6) + arg_intercept+building)
+		year.append(str(y+2012)+"년" +str(m+1) + "월")
+		meme_mean.append(arg_coef*arg_month + arg_intercept+building)
+	
 	linear_x.append(0)
 	linear_y.append(arg_intercept)
-	linear_x.append(8)
+	linear_x.append(y)
 	linear_y.append(arg_coef*arg_month + arg_intercept)
 #print(arg_y)
 #print(arg_month)
@@ -67,7 +72,7 @@ def run(arg_yesan,arg_month,arg_region,arg_coef,arg_intercept,building):
 #plt.axhline(y=arg_yesan/1000, color='r', linewidth=4)
 #	plt.plot(year, arg_y)
 	plt.legend(arg_region,loc = 'upper left',ncol=4,bbox_to_anchor=(1, 1)) 
-	rc('font', family='NanumGothic')
+	rc('font', family='AppleGothic')
 	plt.rcParams['axes.unicode_minus'] = False
 	plt.show()
 #deep_m.run(arg_month,arg_region)
